@@ -45,9 +45,9 @@ tPosL previous(tPosL P, tList L){
 //Mirar de optimizar
 
 tPosL findItem(tProductId I, tList L){
-    tPosL p;   
-    if (isEmptyList(L)) p==LNULL;
-    else for(p=L;p!=LNULL && p->data.productId!=I && strcmp(I,p->data.productId)>0);
+    tPosL p;
+    if (isEmptyList(L)) p=LNULL;
+    else for(p=L; p!=LNULL && p->data.productId!=I && strcmp(I, p->data.productId)>0; p= next(p, L));
     return p;   
 }
 
@@ -80,6 +80,19 @@ tItemL getItem(tPosL P, tList L){
     return P->data;
 }
 
-void deleteAtposition(tPosL p,tList *L){
-   if(!isEmptyList(L) &&
+void deleteAtPosition(tPosL P,tList *L){
+   if(P!=LNULL && !isEmptyStack (P->data.bidstack)){
+       tPosL q;
+       if(P == *L) *L= P->next;
+       else if(P->next == LNULL){
+           for(q= *L; q->next!=P; q= q->next);
+           q->next= LNULL;
+       }else {
+           q= P->next;
+           P->data= q->data;
+           P->next= q->next;
+           P= q;
+       }
+       free(P);
+   }
 }
