@@ -47,7 +47,7 @@ tPosL previous(tPosL P, tList L){
 tPosL findItem(tProductId I, tList L){
     tPosL p;
     if (isEmptyList(L)) p=LNULL;
-    else for(p=L; p!=LNULL && p->data.productId!=I && strcmp(I, p->data.productId)>0; p=p->next);
+    else for(p=L; p!=LNULL && strcmp(I, p->data.productId)!=0 && strcmp(I, p->data.productId)>0; p=p->next);
     return p;   
 }
 
