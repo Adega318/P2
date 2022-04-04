@@ -47,7 +47,7 @@ tPosL previous(tPosL P, tList L){
 tPosL findItem(tProductId I, tList L){
     tPosL p;
     if (isEmptyList(L)) p=LNULL;
-    else for(p=L; p!=LNULL && p->data.productId!=I && strcmp(I, p->data.productId)>0; p= next(p, L));
+    else for(p=L; p!=LNULL && p->data.productId!=I && strcmp(I, p->data.productId)>0; p=p->next);
     return p;   
 }
 
@@ -62,11 +62,14 @@ bool insertItem(tItemL I,tList *L){
         else if(strcmp(I.productId, (*L)->data.productId)<0){
             q->next= *L;
             *L= q;
-        }
-        else{
-            p= findItem(I.productId, *L);
-            q->next= p->next;
-            p->next= q;
+        }else{
+            for(p=*L; strcmp(I.productId, p->next->data.productId)>0 && p->next->next!=LNULL; p=p->next);
+            if(p->next->next==LNULL && strcmp(I.productId, p->next->data.productId)>0){
+                p->next->next=q;
+            }else {
+                q->next=p->next;
+                p->next=q;
+            }
         }
     }
     return aux;
@@ -81,7 +84,7 @@ tItemL getItem(tPosL P, tList L){
 }
 
 void deleteAtPosition(tPosL P,tList *L){
-    if(P!=LNULL && !isEmptyStack(P->data.bidstack)){
+    if(P!=LNULL /*&& !isEmptyStack(P->data.bidstack)*/){
         tPosL q;
         if(P == *L) *L= P->next;
         else if(P->next == LNULL){
