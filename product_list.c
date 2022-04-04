@@ -45,7 +45,7 @@ tPosL previous(tPosL P, tList L){
 //Mirar de optimizar
 
 tPosL findItem(tProductId I, tList L){
-
+:)
 }
 
 bool insertItem(tItemL I,tList *L){
