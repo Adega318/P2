@@ -14,14 +14,34 @@ bool createNode(tPosL *P){
     return *P!=LNULL;
 }
 
+bool isEmptyList(tList L){
+    return L==LNULL;
+}
+
+tPosL findItem(tProductId I, tList L){
+    tPosL p;
+    if(isEmptyList(L)) p=LNULL;
+    else for(p=L; p!=LNULL && 0!=strcmp(p->data.productId, I); p=p->next);
+    return p;
+}
+
 bool insertItem(tItemL I,tPosL P,tList *L){
     tPosL q,p;
-    bool aux;
+    bool aux= 1;
     if(!createNode(&q)) aux=0;
     else{
         q->data=I;
         q->next=LNULL;
         if(*L==LNULL) *L=q;
-        else if(strcmp(I.productId, (*L)->data.productId)<0)
+        else if(strcmp(I.productId, (*L)->data.productId)<0){
+            q->next= *L;
+            *L= q;
+        }
+        else{
+            p= findItem(I.productId, *L);
+            q->next= p->next;
+            p->next= q;
+        }
     }
+    return aux;
 }
