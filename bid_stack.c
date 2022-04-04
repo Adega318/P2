@@ -10,28 +10,28 @@
 #include "bid_stack.h"
 
 void createEmptyStack(tStack *S){
-    S->lastPos= SNULL;
+    S->top= SNULL;
 }
 
 bool push(tItemS i, tStack *S){
     bool aux;
-    if(S->lastPos >= MAX-1) aux= 0;
+    if(S->top >= MAX - 1) aux= 0;
     else{
-        S->lastPos++;
-        S->data[S->lastPos]= i;
+        S->top++;
+        S->data[S->top]= i;
         aux= 1;
     }
     return aux;
 }
 
 void pop(tStack *S){
-    S->lastPos--;
+    S->top--;
 }
 
 tItemS peek(tStack S){
-   return S.data[S.lastPos];
+   return S.data[S.top];
 }
 
 bool isEmptyStack (tStack S){
-    return S.lastPos == SNULL;
+    return S.top == SNULL;
 }

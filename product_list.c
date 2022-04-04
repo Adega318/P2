@@ -81,18 +81,18 @@ tItemL getItem(tPosL P, tList L){
 }
 
 void deleteAtPosition(tPosL P,tList *L){
-   if(P!=LNULL && !isEmptyStack (P->data.bidstack)){
-       tPosL q;
-       if(P == *L) *L= P->next;
-       else if(P->next == LNULL){
-           for(q= *L; q->next!=P; q= q->next);
-           q->next= LNULL;
-       }else {
-           q= P->next;
-           P->data= q->data;
-           P->next= q->next;
-           P= q;
-       }
-       free(P);
-   }
+    if(P!=LNULL && !isEmptyStack(P->data.bidstack)){
+        tPosL q;
+        if(P == *L) *L= P->next;
+        else if(P->next == LNULL){
+            for(q= *L; q->next!=P; q= q->next);
+            q->next= LNULL;
+        }else {
+            q= P->next;
+            P->data= q->data;
+            P->next= q->next;
+            P= q;
+        }
+        free(P);
+    }
 }

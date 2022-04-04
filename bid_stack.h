@@ -25,14 +25,14 @@ typedef struct{
 typedef int tPosS;
 typedef struct {
     tItemS data[MAX];
-    tPosS lastPos;
+    tPosS top;
 } tStack;
 
 void createEmptyStack(tStack *S);
 bool push(tItemS i, tStack *S);
 void pop(tStack *S);
 tItemS peek(tStack S);
-bool isEmptyStack (tStack S);
+bool isEmptyStack(tStack S);
 
 
 #endif

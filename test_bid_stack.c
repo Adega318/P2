@@ -46,7 +46,7 @@ int main() {
     show_stack_state(stack);
 
 
-    /* pop */
+    /* top */
     printf("* Poping a bid:\n");
     pop(&stack);
     show_stack_state(stack);
