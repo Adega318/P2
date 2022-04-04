@@ -79,3 +79,7 @@ void updateItem(tItemL I, tPosL P, tList *L){
 tItemL getItem(tPosL P, tList L){
     return P->data;
 }
+
+void deleteAtposition(tPosL p,tList *L){
+   if(!isEmptyList(L) &&
+}
