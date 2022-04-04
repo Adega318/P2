@@ -14,18 +14,41 @@ bool createNode(tPosL *P){
     return *P!=LNULL;
 }
 
+void createEmptyList(tList *L){
+    *L=LNULL;
+}
+
 bool isEmptyList(tList L){
     return L==LNULL;
 }
 
-tPosL findItem(tProductId I, tList L){
+tPosL first(tList L){
+    return L;
+}
+
+tPosL last(tList L){
     tPosL p;
-    if(isEmptyList(L)) p=LNULL;
-    else for(p=L; p!=LNULL && 0!=strcmp(p->data.productId, I); p=p->next);
+    for(p=L; p->next!=LNULL; p=p->next);
     return p;
 }
 
-bool insertItem(tItemL I,tPosL P,tList *L){
+tPosL next(tPosL P, tList L){
+    return P->next;
+}
+
+tPosL previous(tPosL P, tList L){
+    tPosL p;
+    if(P==L) p=LNULL;
+    else for(p=L; p->next!=P; p=p->next);
+    return p;
+}
+//Mirar de optimizar
+
+tPosL findItem(tProductId I, tList L){
+
+}
+
+bool insertItem(tItemL I,tList *L){
     tPosL q,p;
     bool aux= 1;
     if(!createNode(&q)) aux=0;
@@ -44,4 +67,12 @@ bool insertItem(tItemL I,tPosL P,tList *L){
         }
     }
     return aux;
+}
+
+void updateItem(tItemL I, tPosL P, tList *L){
+    P->data=I;
+}
+
+tItemL getItem(tPosL P, tList L){
+    return P->data;
 }
