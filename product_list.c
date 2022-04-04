@@ -45,7 +45,10 @@ tPosL previous(tPosL P, tList L){
 //Mirar de optimizar
 
 tPosL findItem(tProductId I, tList L){
-
+    tPosL p;   
+    if (isEmptyList(L)) p==LNULL;
+    else for(p=L;p!=LNULL && p->data.productId!=I && strcmp(I,p->data.productId)>0);
+    return p;   
 }
 
 bool insertItem(tItemL I,tList *L){
