@@ -46,8 +46,10 @@ tPosL previous(tPosL P, tList L){
 
 tPosL findItem(tProductId I, tList L){
     tPosL p;
+    int c=0;
     if (isEmptyList(L)) p=LNULL;
     else for(p=L; p!=LNULL && strcmp(I, p->data.productId)!=0 && strcmp(I, p->data.productId)>0; p=p->next);
+    if(strcmp(I, p->data.productId)!=0) p=LNULL;
     return p;   
 }
 
@@ -84,18 +86,16 @@ tItemL getItem(tPosL P, tList L){
 }
 
 void deleteAtPosition(tPosL P,tList *L){
-    if(P!=LNULL /*&& !isEmptyStack(P->data.bidstack)*/){
-        tPosL q;
-        if(P == *L) *L= P->next;
-        else if(P->next == LNULL){
-            for(q= *L; q->next!=P; q= q->next);
-            q->next= LNULL;
-        }else {
-            q= P->next;
-            P->data= q->data;
-            P->next= q->next;
-            P= q;
-        }
-        free(P);
+    tPosL q;
+    if(P == *L) *L= P->next;
+    else if(P->next == LNULL){
+        for(q= *L; q->next!=P; q= q->next);
+        q->next= LNULL;
+    }else {
+        q= P->next;
+        P->data= q->data;
+        P->next= q->next;
+        P= q;
     }
+    free(P);
 }
