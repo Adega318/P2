@@ -42,13 +42,14 @@ tPosL previous(tPosL P, tList L){
     else for(p=L; p->next!=P; p=p->next);
     return p;
 }
-//Mirar de optimizar
 
 tPosL findItem(tProductId I, tList L){
     tPosL p;
     if (isEmptyList(L)) p=LNULL;
-    else for(p=L; p!=LNULL && strcmp(I, p->data.productId)!=0 && strcmp(I, p->data.productId)>0; p=p->next);
-    if(strcmp(I, p->data.productId)!=0) p=LNULL;
+    else {
+        for(p=L; p!=LNULL && strcmp(I, p->data.productId)!=0 && strcmp(I, p->data.productId)>0; p=p->next);
+        if(p!=LNULL && strcmp(I, p->data.productId)!=0) p=LNULL;
+    }
     return p;   
 }
 
